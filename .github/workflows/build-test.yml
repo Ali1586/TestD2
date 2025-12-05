@@ -1,0 +1,21 @@
+[cite_start]name: Build and Test [cite: 225]
+
+[cite_start]on: [push, pull_request] [cite: 226]
+
+[cite_start]jobs: [cite: 227]
+  [cite_start]test: [cite: 228]
+    [cite_start]runs-on: ubuntu-latest [cite: 229]
+
+    [cite_start]steps: [cite: 230]
+    - [cite_start]uses: actions/checkout@v3 [cite: 231]
+
+    - [cite_start]name: Set up Python [cite: 232]
+      [cite_start]uses: actions/setup-python@v4 [cite: 233]
+      with:
+        [cite_start]python-version: '3.9' [cite: 235]
+
+    - [cite_start]name: Test imports and syntax [cite: 236]
+      [cite_start]run: | [cite: 237]
+        [cite_start]python -c "import sqlite3, os; print('All imports successful')" [cite: 238]
+        [cite_start]python -m py_compile app.py [cite: 239]
+        [cite_start]echo "Code compilation successful" [cite: 240]
