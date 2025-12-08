@@ -1,85 +1,47 @@
 import sqlite3
 import os
 
-def init_database():
-    """Initialize the database and create users table"""
-    db_path = os.getenv('DATABASE_PATH', '/data/test_users.db')
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
-    
-    # Create users table
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            email TEXT NOT NULL
-        )
-    ''')
-    
-    # Check if users already exist
-    cursor.execute('SELECT COUNT(*) FROM users')
-    count = cursor.fetchone()[0]
-    
-    if count == 0:
-        # Insert test users only if table is empty
-        test_users = [
-            ('Anna Andersson', 'anna@test.se'),
-            ('Bo Bengtsson', 'bo@test.se')
-        ]
-        
-        cursor.executemany('INSERT INTO users (name, email) VALUES (?, ?)', test_users)
-        print("Database initialized with test users")
-    else:
-        print(f"Database already contains {count} users")
-    
-    conn.commit()
-    conn.close()
+def init_db():
+    if os.path.exists('mynewapp.db'):
+        os.remove('mynewapp.db')
+conn=sqlite3.connect('mynewapp.db')
 
-def display_users():
-    """Display all users in the database"""
-    db_path = os.getenv('DATABASE_PATH', '/data/test_users.db')
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
-    
-    cursor.execute('SELECT * FROM users')
-    users = cursor.fetchall()
-    
-    print("\nCurrent users in database:")
-    for user in users:
-        print(f"ID: {user[0]}, Name: {user[1]}, Email: {user[2]}")
-    
-    conn.close()
+cursor=conn.cursor()
 
-def clear_test_data():
-    """GDPR Action 1: Clear all test data"""
-    db_path = os.getenv('DATABASE_PATH', '/data/test_users.db')
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
-    
-    cursor.execute('DELETE FROM users')
-    conn.commit()
-    conn.close()
-    print("All test data has been cleared (GDPR compliant)")
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS personer (
+       id INTIGER PRIMERY KEY,
+       name TEXT,
+       ålder INTEGER
+)
+''')
 
-def anonymize_data():
-    """GDPR Action 2: Anonymize user data"""
-    db_path = os.getenv('DATABASE_PATH', '/data/test_users.db')
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
-    
-    cursor.execute('UPDATE users SET name = "Anonym Användare"')
-    conn.commit()
-    conn.close()
-    print("All user names have been anonymized (GDPR compliant)")
+cursor.execute('''
+INSERT INTO personer(id,name,ålder)
+VALUES(?,?,?)                              
+''',(1,'Sara',25))
 
-if __name__ == "__main__":
+conn.commit()
+
+cursor.execute('SELECT * FROM personer')
+resultat = cursor.fetchall()
+
+for rad in resultat:
+    print(f"ID: {rad[0]}, Namn: {rad[1]}, Ålder: {rad[2]}")
+
+conn.close()
+
+if __name__ == "__name__":
     init_database()
     display_users()
     
-    # Keep the container running for testing
+    
+    init_db()
+
     print("\nContainer is running. Press Ctrl+C to exit.")
+
     try:
-        while True:
+        while True:  # Denna loop håller containern igång
             pass
     except KeyboardInterrupt:
         print("\nShutting down...")

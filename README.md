@@ -1,24 +1,19 @@
-# Personregister i testmiljön
+## Mynewapp 
+- Smidig och lätt system för säkerställa att testdata är nogranat i integrationen med GDPR
 
-Ett enkelt system för att hantera testdata på ett GDPR-kompatibelt sätt.
+## Docker 
+- Appen är i isolerade Docker container med hjälp av Python 3 (VS)
 
-## Funktioner
 
-- Skapa och initiera databas med testanvändare
-- Visa alla användare
-- Rensa all testdata (GDPR åtgärd 1)
-- Anonymisera användardata (GDPR åtgärd 2)
-
-## Installation och körning
 
 ### Förutsättningar
 - Docker och Docker Compose
 - Python 3.9+
+- Git
+
 
 ### Kör med Docker
+- I terminal ska projektmappen nås (TestD2) och sen körs följande kommando för att bygga upp container 
 
-1. Klona repot:
-```bash
-git clone <your-repo-url>
-cd personregister-testmiljo
-2.	Bygg och kör containern
+
+´´´docker-compose up --build´´´
