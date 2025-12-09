@@ -38,10 +38,10 @@ if __name__ == "__name__":
     
     init_db()
 
-    print("\nContainer is running. Press Ctrl+C to exit.")
+    #print("\nContainer is running. Press Ctrl+C to exit.")
 
-    try:
-        while True:  # Denna loop håller containern igång
-            pass
-    except KeyboardInterrupt:
-        print("\nShutting down...")
+    #try:
+     #   while True:  # Denna loop håller containern igång
+      #      pass
+    #except KeyboardInterrupt:
+     #   print("\nShutting down...")
