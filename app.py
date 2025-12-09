@@ -32,16 +32,9 @@ def init_db():
     conn.close()
 
 if __name__ == "__name__":
-    #init_database()
-    #display_users()
+    
     
     
     init_db()
 
-    #print("\nContainer is running. Press Ctrl+C to exit.")
-
-    #try:
-     #   while True:  # Denna loop håller containern igång
-      #      pass
-    #except KeyboardInterrupt:
-        #print("\nShutting down...")
+    
