@@ -16,10 +16,11 @@ def init_db():
 )
 ''')
 
-    cursor.execute('''
-    INSERT INTO personer(id,name,ålder)
-    VALUES(?,?,?)                              
-''',(1,'Sara',25))
+    cursor.executemany('''
+        INSERT INTO personer(id, name, ålder)
+        VALUES(?,?,?)                              
+    ''', [(1, 'Sara', 25),
+          (2, 'Matteo', 30)])
  
     conn.commit()
 
@@ -31,17 +32,9 @@ def init_db():
 
     conn.close()
 
-if __name__ == "__name__":
-    #init_database()
-    #display_users()
+if __name__ == "__main__":
     
     
     init_db()
 
-    #print("\nContainer is running. Press Ctrl+C to exit.")
-
-    #try:
-     #   while True:  # Denna loop håller containern igång
-      #      pass
-    #except KeyboardInterrupt:
-        #print("\nShutting down...")
+    
