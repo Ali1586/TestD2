@@ -63,9 +63,8 @@ def clear_test_data():
 
 
 def anonymize_data():  
+    conn = connect()
     
-    conn=sqlite3.connect('mynewapp.db')
-
     cursor=conn.cursor()
 
     cursor.execute('''
