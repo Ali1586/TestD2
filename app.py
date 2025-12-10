@@ -38,10 +38,8 @@ def init_db():
     
 
 
-def dis_dat():  
-    #db_path = os.getenv('DATABASE_PATH', '/data/test_users.db')
-    #conn=sqlite3.connect('mynewapp.db')
-
+def add_new_person_data():  
+    
     conn=connect()
     cursor=conn.cursor()
 
@@ -53,10 +51,8 @@ def dis_dat():
     
     conn.close()
       
-def cl_dat():  
-    #db_path = os.getenv('DATABASE_PATH', '/data/test_users.db')
-    #conn=sqlite3.connect('mynewapp.db')
-     
+def clear_test_data():  
+    
     conn=connect()
     cursor=conn.cursor()
 
@@ -66,8 +62,8 @@ def cl_dat():
     conn.close()
 
 
-def an_dat():  
-    #db_path = os.getenv('DATABASE_PATH', '/data/test_users.db')
+def anonymize_data():  
+    
     conn=sqlite3.connect('mynewapp.db')
 
     cursor=conn.cursor()
@@ -87,17 +83,17 @@ if __name__ == "__main__":
     
     print("\n[Steg 1: Initiera & Visa Basdata]")
     init_db()
-    dis_dat()
+    add_new_person_data()
 
 
     print("\n[Steg 2: Anonymisera alla rader]")
-    an_dat()
-    dis_dat()
+    anonymize_data()
+    add_new_person_data()
     
     print("\n[Steg 3: Rensa all data]")
-    cl_dat()
+    clear_test_data()
 
-    dis_dat()
+    add_new_person_data()
 
     print('testdata är klart')
 

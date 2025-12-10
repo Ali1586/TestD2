@@ -38,11 +38,11 @@ jobs:
           python -c "import app; app.init_db()"
           
           echo "Testa att lägga till GDPR data"
-          python -c "import app; app.dis_dat(); print('test är OK')
+          python -c "import app; app.add_new_person_data(); print('test är OK')
 
           echo "Testa att anonymisera GDPR data"
-          python -c "import app; app.an_dat(); print('GDPR Anonymize test OK')"
+          python -c "import app; app.anonymize_data(); print('GDPR Anonymize test OK')"
 
           echo "Testa GDPR-krav (cl_dat)"
-          python -c "import app; app.cl_dat(); print('GDPR Clear test OK')"
+          python -c "import app; app.clear_test_data(); print('GDPR Clear test OK')"
 
