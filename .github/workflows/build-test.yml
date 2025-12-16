@@ -1,48 +1,26 @@
-name: Projekt Kodvalidering
+name: Build and Test
 
-on: 
-  push: 
-    branches:
-      - main
-  
+on:
+  push:
+    branches: [ main, master ]
   pull_request:
-    branches:
-      - main 
-  
+    branches: [ main, master ]
 
 jobs:
-  validate_code:
+  test:
     runs-on: ubuntu-latest
     
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
       
-      - uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11' 
-
-      - name: Validate syntax & Test All functions
-        run: |
-          # Försök kompilera hela applikationsfilen
-          python -m py_compile app.py
-          echo "Syntax check and compilation successful."
-          
-      - name: Test key application functions (GDPR & VG)
-        run: |
-          echo "Validera Syntax"
-          python -m py_compile app.py
-
-          echo "Initiera Databas"
-          python -c "import app; app.init_db()"
-          
-          echo "Testa att lägga till GDPR data"
-          python -c "import app; app.add_new_person_data(); print('test är OK')"
-
-          echo "Testa att anonymisera GDPR data"
-          python -c "import app; app.anonymize_data(); print('GDPR Anonymize test OK')"
-
-          echo "Testa GDPR-krav (cl_dat)"
-          python -c "import app; app.clear_test_data(); print('GDPR Clear test OK')"
-
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Run tests
+      run: python test_enkel.py
+        
+    - name: Run main application
+      run: python app.py

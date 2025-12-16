@@ -1,13 +1,8 @@
 version: '3.8'
-
 services:
-  app:
+  myapp:
     build: .
-    container_name: gdpr-user-registry
+    container_name: gdpr-app
     volumes:
-      - database_data:/data
-    environment:
-      - DATABASE_PATH=/data/test_users.db
-
-volumes:
-  database_data:
+      - ./mynewapp.db:/app/mynewapp.db  # Spara databasen på host
+    command: python app.py
